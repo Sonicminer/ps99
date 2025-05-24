@@ -1,0 +1,255 @@
+local player = game.Players.LocalPlayer
+local workspace = game:GetService("Workspace")
+local plots = workspace.__THINGS.Plots
+
+for _, plot in pairs(plots:GetChildren()) do
+    local success, err = pcall(function()
+        local textLabel = plot.Interactable.OwnerSign.SurfaceGui.Frame.TextLabel
+        if textLabel.Text == player.Name .. "'s Farm" then
+            getgenv().plotID = tonumber(plot.Name)
+            print("Dein Plot wurde gefunden: " .. getgenv().plotID)
+        end
+    end)
+end
+
+if getgenv().plotID == nil then
+    warn("Kein Plot gefunden.")
+end
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = " | PS99",
+   LoadingTitle = "",
+   LoadingSubtitle = "by Luca",
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "Big Hub"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided",
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+local FarmTab = Window:CreateTab("Farm🧑‍🌾", nil) -- Title, Image
+
+local Toggle = FarmTab:CreateToggle({
+   Name = "Auto Collect Storage",
+   CurrentValue = false,
+   Flag = "autocollect", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autocollect = (Value);
+   end,
+})
+
+local Toggle = FarmTab:CreateToggle({
+   Name = "Auto Buy Mystery Merchant",
+   CurrentValue = false,
+   Flag = "autobuymerchant", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autobuymerchant = (Value);
+   end,
+})
+
+local Section = FarmTab:CreateSection("Auto Buy Eggs")
+
+local Toggle = FarmTab:CreateToggle({
+   Name = "Auto Buy Yeti Egg",
+   CurrentValue = false,
+   Flag = "autoyetiegg", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autoyetiegg = (Value);
+   end,
+})
+
+local Toggle = FarmTab:CreateToggle({
+   Name = "Auto Buy Demon Egg",
+   CurrentValue = false,
+   Flag = "autodemonegg", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autodemonegg = (Value);
+   end,
+})
+
+local Toggle = FarmTab:CreateToggle({
+   Name = "Auto Buy Agony Egg",
+   CurrentValue = false,
+   Flag = "autoagonyegg", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autoagonyegg = (Value);
+   end,
+})
+
+local Toggle = FarmTab:CreateToggle({
+   Name = "Auto Buy Angelus Egg",
+   CurrentValue = false,
+   Flag = "autoangelusegg", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autoangelusegg = (Value);
+   end,
+})
+
+local Toggle = FarmTab:CreateToggle({
+   Name = "Auto Buy Dominus Egg",
+   CurrentValue = false,
+   Flag = "autodominusegg", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autodominusegg = (Value);
+   end,
+})
+
+local Section = FarmTab:CreateSection("Auto Buy Supplys")
+
+local Toggle = FarmTab:CreateToggle({
+   Name = "Auto Buy Carrots",
+   CurrentValue = false,
+   Flag = "autocarrots", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autocarrots = (Value);
+   end,
+})
+
+local Toggle = FarmTab:CreateToggle({
+   Name = "Auto Buy Sprinkler I",
+   CurrentValue = false,
+   Flag = "autosprink1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autosprink1 = (Value);
+   end,
+})
+
+local Toggle = FarmTab:CreateToggle({
+   Name = "Auto Buy Sprinkler II",
+   CurrentValue = false,
+   Flag = "autosprink2", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autosprink2 = (Value);
+   end,
+})
+
+local Toggle = FarmTab:CreateToggle({
+   Name = "Auto Buy Sprinkler III",
+   CurrentValue = false,
+   Flag = "autosprink3", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autosprink3 = (Value);
+   end,
+})
+
+local MainTab = Window:CreateTab("Wheels🎡", nil) -- Title, Image
+
+local Toggle = MainTab:CreateToggle({
+   Name = "Auto Use Starter Tickets",
+   CurrentValue = false,
+   Flag = "autoStarterWheel", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autoStarterWheel = (Value);
+   end,
+})
+
+local Toggle = MainTab:CreateToggle({
+   Name = "Auto Use Tech Tickets",
+   CurrentValue = false,
+   Flag = "autoTechWheel", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autoTechWheel = (Value);
+   end,
+})
+
+local Toggle = MainTab:CreateToggle({
+   Name = "Auto Use Void Tickets",
+   CurrentValue = false,
+   Flag = "autoVoidWheel", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autoVoidWheel = (Value);
+   end,
+})
+
+local Toggle = MainTab:CreateToggle({
+   Name = "Auto Use Fantasy Tickets",
+   CurrentValue = false,
+   Flag = "autofanWheel", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       getgenv().autofanWheel = (Value);
+   end,
+})
+
+
+while wait() do
+    if getgenv().autocarrots == true then
+        game:GetService("ReplicatedStorage").Network.Plots_Invoke:InvokeServer(getgenv().plotID,"BuyTraveling",1)
+        game:GetService("ReplicatedStorage").Network.Plots_Invoke:InvokeServer(getgenv().plotID,"BuyTraveling",2)
+        game:GetService("ReplicatedStorage").Network.Plots_Invoke:InvokeServer(getgenv().plotID,"BuyTraveling",3)
+        game:GetService("ReplicatedStorage").Network.Plots_Invoke:InvokeServer(getgenv().plotID,"BuyTraveling",4)
+        wait()
+    end
+    if getgenv().autocarrots == true then
+        game:GetService("ReplicatedStorage").Network.Plots_Invoke:InvokeServer(getgenv().plotID,"BuySupply","Pixel Carrot")
+        wait()
+    end
+    if getgenv().autosprink1 == true then
+        game:GetService("ReplicatedStorage").Network.Plots_Invoke:InvokeServer(getgenv().plotID,"BuySupply","Farming Sprinkler 1")
+        wait()
+    end
+    if getgenv().autosprink2 == true then
+        game:GetService("ReplicatedStorage").Network.Plots_Invoke:InvokeServer(getgenv().plotID,"BuySupply","Farming Sprinkler 2")
+        wait()
+    end
+    if getgenv().autosprink3 == true then
+        game:GetService("ReplicatedStorage").Network.Plots_Invoke:InvokeServer(getgenv().plotID,"BuySupply","Farming Sprinkler 3")
+        wait()
+    end
+    if getgenv().autocollect == true then
+        game:GetService("ReplicatedStorage").Network.Farming_ClaimStorage:InvokeServer()
+        wait()
+    end
+    if getgenv().autoyetiegg == true then
+        game:GetService("ReplicatedStorage").Network.Plots_Invoke:InvokeServer(getgenv().plotID,"BuyEgg","Pixel Yeti")
+        wait()
+    end
+    if getgenv().autodemonegg == true then
+        game:GetService("ReplicatedStorage").Network.Plots_Invoke:InvokeServer(getgenv().plotID,"BuyEgg","Pixel Demon")
+        wait()
+    end
+    if getgenv().autoagonyegg == true then
+        game:GetService("ReplicatedStorage").Network.Plots_Invoke:InvokeServer(getgenv().plotID,"BuyEgg","Pixel Agony")
+        wait()
+    end
+    if getgenv().autoangelusegg == true then
+        game:GetService("ReplicatedStorage").Network.Plots_Invoke:InvokeServer(getgenv().plotID,"BuyEgg","Pixel Angelus")
+        wait()
+    end
+    if getgenv().autodominusegg == true then
+        game:GetService("ReplicatedStorage").Network.Plots_Invoke:InvokeServer(getgenv().plotID,"BuyEgg","Pixel Dominus Astra")
+        wait()
+    end
+    if getgenv().autofanWheel == true then
+        game:GetService("ReplicatedStorage").Network["Spinny Wheel: Request Spin"]:InvokeServer("FantasyWheel")
+        wait()
+    end
+    if getgenv().autoVoidWheel == true then
+        game:GetService("ReplicatedStorage").Network["Spinny Wheel: Request Spin"]:InvokeServer("VoidWheel")
+        wait()
+    end
+    if getgenv().autoTechWheel == true then
+        game:GetService("ReplicatedStorage").Network["Spinny Wheel: Request Spin"]:InvokeServer("TechWheel")
+        wait()
+    end
+    if getgenv().autoStarterWheel == true then
+        game:GetService("ReplicatedStorage").Network["Spinny Wheel: Request Spin"]:InvokeServer("StarterWheel")
+        wait()
+    end
+end
